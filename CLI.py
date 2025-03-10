@@ -3,10 +3,11 @@ from determinant import *
 from transposition import *
 from adjugate import *
 from inverse import *
+from equation import *
 
 while True:
     #Choosing the operation
-    print("1)Submatrix 2)Determinant 3)Transpose 4)Adjugate 5)Inverse 6)Exit")
+    print("1)Submatrix 2)Determinant 3)Transpose 4)Adjugate 5)Inverse 6)Solve Equation Using Cramer's Rule 7)Exit")
     cmd=int(input("Choose your operation: "))
     #Submatrix Calculation
     if cmd==1:
@@ -159,6 +160,40 @@ while True:
                         break
         print(inverse(matrix))
     elif cmd==6:
+        while True:
+            try:
+                n=int(input("Enter the number of equations: "))
+            except (TypeError, ValueError):
+                print("Please enter a valid number")
+            else:
+                break
+        coefficients=[]
+        for i in range(n):
+            coefficients.append([])
+            for j in range(n):
+                while True:
+                    try:
+                        a_ij = float(input(f"Enter a{i + 1}{j + 1}: "))
+                        coefficients[i].append(a_ij)
+                    except (ValueError, TypeError):
+                        print("Please enter a valid value")
+                    else:
+                        break
+        values = []
+        for i in range(n):
+            values.append([])
+            while True:
+                try:
+                    b_i = float(input(f"Enter b{i + 1}: "))
+                    values[i].append(b_i)
+                except (ValueError, TypeError):
+                    print("Please enter a valid value")
+                else:
+                    break
+        print(cramer(coefficients, values))
+
+
+    elif cmd==7:
         exit(0)
     else:
         print("Please choose a valid operation")
